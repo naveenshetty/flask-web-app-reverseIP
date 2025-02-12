@@ -101,9 +101,18 @@ jobs:
         run: |
           gcloud container clusters get-credentials flask-cluster --zone us-central1-c
 
-      - name: Deploy to GKE
+      - name: Install Helm
         run: |
-          kubectl apply -f k8s/manifests/deployment.yaml
-          kubectl apply -f k8s/manifests/service.yaml
-          kubectl apply -f k8s/manifests/ingress.yaml
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+          helm version
+
+      - name: Deploy to GKE using Helm
+        run: |
+          helm upgrade --install flask-web-app helm/flask-web-app-chart --namespace default
+
+#      - name: Deploy to GKE
+#        run: |
+#          kubectl apply -f k8s/manifests/deployment.yaml
+#          kubectl apply -f k8s/manifests/service.yaml
+#          kubectl apply -f k8s/manifests/ingress.yaml
 
