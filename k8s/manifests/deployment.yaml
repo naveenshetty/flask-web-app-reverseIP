@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: flask-web-app
-        image: naveen192/flask-reverse-ip:v1
+        image: naveen192/flask-web-app:latest
         ports:
         - containerPort: 5000
