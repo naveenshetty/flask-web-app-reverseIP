@@ -105,9 +105,11 @@ jobs:
         run: |
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
           helm version
-      - name: Delete existing service if it exists
+      - name: Delete existing resources if they exist
         run: |
-          kubectl delete service flask-web-app --ignore-not-found=true    
+          kubectl delete deployment flask-web-app --ignore-not-found=true
+          kubectl delete service flask-web-app --ignore-not-found=true
+          kubectl delete ingress flask-web-app --ignore-not-found=true  
 
       - name: Deploy to GKE using Helm
         run: |
