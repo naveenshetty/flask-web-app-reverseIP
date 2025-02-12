@@ -117,8 +117,7 @@ jobs:
 
       - name: Deploy to GKE using Helm
         run: |
-          helm upgrade --install flask-web-app helm/flask-web-app-chart --namespace default --force
-
+          helm upgrade --install flask-web-app helm/flask-web-app-chart --namespace default --set image.tag=${{github.run_id}}
 
 #      - name: Deploy to GKE
 #        run: |
