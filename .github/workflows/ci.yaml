@@ -113,7 +113,7 @@ jobs:
 
       - name: Deploy to GKE using Helm
         run: |
-          helm upgrade --install flask-web-app helm/flask-web-app-chart --namespace default
+          helm upgrade --install flask-web-app helm/flask-web-app-chart --namespace default --force
 
 #      - name: Deploy to GKE
 #        run: |
