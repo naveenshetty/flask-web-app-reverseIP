@@ -84,6 +84,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.TOKEN }}
+          fetch-depth: 0
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
@@ -105,6 +108,7 @@ jobs:
         run: |
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
           helm version
+
       - name: Delete existing resources if they exist
         run: |
           kubectl delete deployment flask-web-app --ignore-not-found=true
@@ -114,6 +118,7 @@ jobs:
       - name: Deploy to GKE using Helm
         run: |
           helm upgrade --install flask-web-app helm/flask-web-app-chart --namespace default --force
+
 
 #      - name: Deploy to GKE
 #        run: |
