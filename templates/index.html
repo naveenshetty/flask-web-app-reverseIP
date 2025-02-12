@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse IP Address</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reverse IP Address</h1>
+
+    <p>Enter an IP address to reverse it (e.g., 192.168.1.100)</p>
+    <form id="ipForm">
+        <input type="text" id="ipInput" name="ip_address" placeholder="Enter IP address" required>
+        <button type="submit">Reverse IP</button>
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        document.getElementById("ipForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get the IP address from the input field
+            var ipAddress = document.getElementById("ipInput").value;
+
+            // Make an AJAX request to the backend
+            fetch("/reverse_ip", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    "ip_address": ipAddress
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById("result").innerText = data.error;
+                } else {
+                    document.getElementById("result").innerText =
+                        `Original IP: ${data.original_ip} \n Reversed IP: ${data.reversed_ip}`;
+                }
+            })
+            .catch(error => {
+                document.getElementById("result").innerText = 'An error occurred';
+            });
+        });
+    </script>
+</body>
+</html>
