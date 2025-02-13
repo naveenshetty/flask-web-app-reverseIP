@@ -38,6 +38,8 @@ Before starting the deployment process, ensure you have the following:
 - <img src="images/iimg2.png" alt="UI-1" width="400">
 - <img src="images/img3.png" alt="" width="400">
 
+Access via - http://34.67.29.134/
+
 ## Project Structure
 
 ```plaintext
