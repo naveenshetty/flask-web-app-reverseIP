@@ -110,18 +110,6 @@ jobs:
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
           helm version
 
-      - name: Delete existing resources if they exist
-        run: |
-          kubectl delete deployment flask-web-app --ignore-not-found=true
-          kubectl delete service flask-web-app --ignore-not-found=true
-
       - name: Deploy to GKE using Helm
         run: |
           helm upgrade --install flask-web-app helm/flask-web-app-chart --namespace default --set image.tag=${{github.run_id}}
-
-#      - name: Deploy to GKE
-#        run: |
-#          kubectl apply -f k8s/manifests/deployment.yaml
-#          kubectl apply -f k8s/manifests/service.yaml
-#          kubectl apply -f k8s/manifests/ingress.yaml
-
