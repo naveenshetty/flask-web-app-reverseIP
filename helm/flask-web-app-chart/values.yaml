@@ -4,7 +4,7 @@ image:
   repository: naveen192/flask-web-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "13295052658"
+  tag: "13313910506"
 
   ingress:
     enabled: false
