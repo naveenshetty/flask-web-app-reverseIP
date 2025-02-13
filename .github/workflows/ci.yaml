@@ -10,6 +10,7 @@ on:
     paths-ignore:
       - 'helm/**'
       - 'README.md'
+      - 'k8s/**'
 
 jobs:
 
@@ -113,7 +114,6 @@ jobs:
         run: |
           kubectl delete deployment flask-web-app --ignore-not-found=true
           kubectl delete service flask-web-app --ignore-not-found=true
-          kubectl delete ingress flask-web-app --ignore-not-found=true  
 
       - name: Deploy to GKE using Helm
         run: |
